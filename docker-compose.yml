@@ -4,7 +4,7 @@ services:
     container_name: nginx_container
     restart: always
     ports:
-      - "8182:80"
+      - "80:80"
     volumes:
       - ./html/:/usr/share/nginx/html
     networks:
