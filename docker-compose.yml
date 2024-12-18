@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:1-alpine
+    container_name: nginx_container
+    restart: always
+    ports:
+      - "8182:80"
+    volumes:
+      - ./html/:/usr/share/nginx/html
+    networks:
+      - nginx_network
+
+networks:
+  nginx_network:
+    driver: bridge
