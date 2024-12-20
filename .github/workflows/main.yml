@@ -19,14 +19,19 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY_LUPIZ_SRV }}
 
-      # Step 3: Test SSH connection
-      - name: Test SSH Connection
-        run: ssh -o StrictHostKeyChecking=no lupizzelit@103.127.135.194 "echo Connected successfully!"
+      # Step 3: Add server to known_hosts
+      - name: Add server to known_hosts
+        run: |
+          ssh-keyscan 103.127.135.194 >> ~/.ssh/known_hosts
 
-      # Step 4: Deploy ke VPS
+      # Step 4: Test SSH connection
+      - name: Test SSH Connection
+        run: ssh -o StrictHostKeyChecking=yes lupizzelit@103.127.135.194 "echo Connected successfully!"
+
+      # Step 5: Deploy ke VPS
       - name: Deploy to VPS
         run: |
-          ssh -o StrictHostKeyChecking=no lupizzelit@103.127.135.194 << 'EOF'
+          ssh -o StrictHostKeyChecking=yes lupizzelit@103.127.135.194 << 'EOF'
             cd /home/lupizzelit/lupiz-srv-nginx || { echo "Project path not found!"; exit 1; }
             git pull || { echo "Git pull failed!"; exit 1; }
             sudo docker-compose down || { echo "Docker-compose down failed!"; exit 1; }
