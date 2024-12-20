@@ -19,10 +19,16 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY_LUPIZ_SRV }}
 
+<<<<<<< HEAD
       # Step 3: Add server to known_hosts
       - name: Add server to known_hosts
         run: |
           ssh-keyscan 103.127.135.194 >> ~/.ssh/known_hosts
+=======
+      # Step 3: Test SSH connection
+      - name: Test SSH Connection
+        run: ssh -o StrictHostKeyChecking=yes lupizzelit@103.127.135.194 "echo Connected successfully!"
+>>>>>>> 4e924e3fc22f7c23694be54de7e8ac414134b18b
 
       # Step 4: Test SSH connection
       - name: Test SSH Connection
