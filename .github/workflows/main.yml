@@ -27,7 +27,7 @@ jobs:
       - name: Deploy to VPS
         run: |
           ssh -o StrictHostKeyChecking=no lupizzelit@103.127.135.194 << 'EOF'
-            cd /lupiz-srv-nginx || { echo "Project path not found!"; exit 1; }
+            cd /home/lupizzelit/lupiz-srv-nginx || { echo "Project path not found!"; exit 1; }
             git pull || { echo "Git pull failed!"; exit 1; }
             sudo docker-compose down || { echo "Docker-compose down failed!"; exit 1; }
             sudo docker-compose up -d || { echo "Docker-compose up failed!"; exit 1; }
